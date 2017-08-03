@@ -24,6 +24,7 @@
 
 import socket
 import select
+import ssl
 import struct
 import binascii
 import logging
@@ -64,13 +65,17 @@ class Client(object):
     _socket = None
     sequence_generator = None
 
-    def __init__(self, host, port, timeout=5, sequence_generator=None):
+    def __init__(self, host, port, timeout=5, sequence_generator=None,
+                 use_ssl=False):
         """Initialize"""
 
         self.host = host
         self.port = int(port)
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.settimeout(timeout)
+        if use_ssl:
+            logger.debug('Using SSL')
+            self._socket = ssl.wrap_socket(self._socket)
         self.receiver_mode = False
         if sequence_generator is None:
             sequence_generator = SimpleSequenceGenerator()
