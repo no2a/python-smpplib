@@ -2,8 +2,8 @@ from setuptools import setup, find_packages
 import sys
 
 setup(name="python-smpplib",
-      version='1.0.1',
-      url='https://github.com/podshumok/python-smpplib',
+      version='1.1.0',
+      url='https://github.com/no2a/python-smpplib',
       description='SMPP library for python',
       packages=find_packages(),
       install_requires=[ 'six', ],
